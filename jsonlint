@@ -2,6 +2,7 @@
 
 ##############################################################
 #  Script     : jsonlint
+#  Version    : 1.0
 #  Author     : Ray Crawford
 #  Date       : 09/18/2015
 #  Last Edited: 09/18/2015, Ray Crawford
@@ -21,26 +22,28 @@
 # Syntax: jsonlint .
 ##############################################################
 
-require "rubygems"
-require "json"
+require 'rubygems'
+require 'json'
 
 if ARGV.size < 1
-  puts "Please provide a JSON file"
+  puts 'Please provide a JSON file'
   exit 1
 end
 
-while file_name = ARGV.shift do
+file_name = ARGV.shift
+
+while file_name
   begin
     JSON.load(File.read(file_name))
     puts "=>  INFO: File #{file_name} syntax OK"
   rescue JSON::ParserError => e
     puts "=> ERROR: File #{file_name} syntax Error!"
-    errorState = true
+    error_state = true
     puts e.message
   end
 end
 
-if errorState
+if error_state
   exit 1
 else
   exit 0
