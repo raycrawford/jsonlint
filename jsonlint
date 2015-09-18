@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+
+##############################################################
+#  Script     : jsonlint
+#  Author     : Ray Crawford
+#  Date       : 09/18/2015
+#  Last Edited: 09/18/2015, Ray Crawford
+#  Description: Ruby implementation of JSON linting
+##############################################################
+# Purpose:
+#   Designed with CD/CI testing in mind.  Specifically
+#   implemented to test Chef Roles and Environment JSON
+#   Inspiration: http://blog.arangamani.net/blog/2013/04/22/a-ruby-based-json-lint-tool/
+# Requirements:
+# - one or more *.json files for input
+# - exits on 1 with errors and 0 on success for simple
+#   CD/CI Jenkins integration
+# - Need the json gem (gem install json)
+# - Might need gcc (yum install gcc) to build gem
+# - Store file in /usr/local/bin/jsonlint
+# Syntax: jsonlint .
+##############################################################
+
+require "rubygems"
+require "json"
+
+if ARGV.size < 1
+  puts "Please provide a JSON file"
+  exit 1
+end
+
+while file_name = ARGV.shift do
+  begin
+    JSON.load(File.read(file_name))
+    puts "=>  INFO: File #{file_name} syntax OK"
+  rescue JSON::ParserError => e
+    puts "=> ERROR: File #{file_name} syntax Error!"
+    errorState = true
+    puts e.message
+  end
+end
+
+if errorState
+  exit 1
+else
+  exit 0
+end
