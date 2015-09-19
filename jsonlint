@@ -32,7 +32,7 @@ end
 
 file_name = ARGV.shift
 
-while file_name
+while file_name ne null
   begin
     JSON.load(File.read(file_name))
     puts "=>  INFO: File #{file_name} syntax OK"
