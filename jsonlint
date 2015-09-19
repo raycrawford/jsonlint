@@ -2,7 +2,7 @@
 
 ##############################################################
 #  Script     : jsonlint
-#  Version    : 1.0
+#  Version    : 1.1
 #  Author     : Ray Crawford
 #  Date       : 09/18/2015
 #  Last Edited: 09/18/2015, Ray Crawford
@@ -30,7 +30,7 @@ if ARGV.size < 1
   exit 1
 end
 
-error_state = 1
+error_state = false
 (ARGV).each do |file_name|
   begin
     JSON.load(File.read(file_name))
