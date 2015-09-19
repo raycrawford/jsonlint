@@ -30,9 +30,8 @@ if ARGV.size < 1
   exit 1
 end
 
-file_name = ARGV.shift
-
-while file_name ne null
+error_state = 1
+(ARGV).each do |file_name|
   begin
     JSON.load(File.read(file_name))
     puts "=>  INFO: File #{file_name} syntax OK"
