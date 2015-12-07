@@ -33,7 +33,7 @@ end
 error_state = false
 (ARGV).each do |file_name|
   begin
-    JSON.load(File.read(file_name))
+    JSON.parse(File.read(file_name))
     puts "=>  INFO: File #{file_name} syntax OK"
   rescue JSON::ParserError => e
     puts "=> ERROR: File #{file_name} syntax Error!"
