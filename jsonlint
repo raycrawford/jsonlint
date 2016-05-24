@@ -25,13 +25,13 @@
 require 'rubygems'
 require 'json'
 
-if ARGV.size < 1
+if ARGV.empty?
   puts 'Please provide a JSON file'
   exit 1
 end
 
 error_state = false
-(ARGV).each do |file_name|
+ARGV.each do |file_name|
   begin
     JSON.parse(File.read(file_name))
     puts "=>  INFO: File #{file_name} syntax OK"
@@ -47,3 +47,4 @@ if error_state
 else
   exit 0
 end
+
